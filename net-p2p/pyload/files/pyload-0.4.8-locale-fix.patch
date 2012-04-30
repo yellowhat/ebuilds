@@ -1,0 +1,100 @@
+diff -urpN pyload.orig/module/setup.py pyload.new/module/setup.py
+--- pyload.orig/module/setup.py	2011-10-04 14:55:18.000000000 +0200
++++ pyload.new/module/setup.py	2011-11-24 03:03:29.494117957 +0100
+@@ -44,7 +44,10 @@ class Setup():
+ 
+         langs = self.config.getMetaData("general", "language")["type"].split(";")
+         lang = self.ask(u"Choose your Language / Wähle deine Sprache", "en", langs)
+-        translation = gettext.translation("setup", join(self.path, "locale"), languages=["en", lang])
++        if not exists(join(self.path, "locale")):
++	         translation = gettext.translation("setup", "/usr/share/pyload/locale", languages=["en", lang])
++        else:
++                 translation = gettext.translation("setup", join(self.path, "locale"), languages=["en", lang])
+         translation.install(True)
+ 
+ #        print ""
+@@ -335,7 +338,12 @@ class Setup():
+ 
+     def set_user(self):
+ 
+-        translation = gettext.translation("setup", join(self.path, "locale"), languages=["en", self.config["general"]["language"]])
++        if not exists(join(self.path, "locale")):
++	          translation = gettext.translation("setup", "/usr/share/pyload/locale",
++		                        languages=["en", self.config["general"]["language"]])
++	else:
++                  translation = gettext.translation("setup", join(self.path, "locale"),
++		                        languages=["en", self.config["general"]["language"]])
+         translation.install(True)
+         
+         from module.database import DatabaseBackend
+diff -urpN pyload.orig/module/web/webinterface.py pyload.new/module/web/webinterface.py
+--- pyload.orig/module/web/webinterface.py	2011-10-04 14:55:18.000000000 +0200
++++ pyload.new/module/web/webinterface.py	2011-11-24 03:00:58.256222754 +0100
+@@ -95,7 +95,11 @@ if PREFIX:
+ else:
+     env.filters["url"] = lambda x: PREFIX + x if x.startswith("/") else x
+ 
+-translation = gettext.translation("django", join(PYLOAD_DIR, "locale"),
++if not exists(join(PYLOAD_DIR, "locale")):
++         translation = gettext.translation("django", "/usr/share/pyload/locale",
++	                          languages=["en", config.get("general","language")])
++else:
++         translation = gettext.translation("django", join(PYLOAD_DIR, "locale"),
+                                   languages=["en", config.get("general","language")])
+ translation.install(True)
+ env.install_gettext_translations(translation)
+diff -urpN pyload.orig/pyLoadCli.py pyload.new/pyLoadCli.py
+--- pyload.orig/pyLoadCli.py	2011-10-04 14:55:18.000000000 +0200
++++ pyload.new/pyLoadCli.py	2011-11-24 03:00:58.256222754 +0100
+@@ -493,7 +493,11 @@ if __name__ == "__main__":
+         for opt in configFile.items("cli"):
+             config[opt[0]] = opt[1]
+ 
+-    translation = gettext.translation("pyLoadCli", join(pypath, "locale"),
++    if not exists(join(pypath, "locale")):
++         translation = gettext.translation("pyLoadCli", "/usr/share/pyload/locale",
++	                              languages=["en", config["language"]])
++    else:
++         translation = gettext.translation("pyLoadCli", join(pypath, "locale"),
+                                       languages=["en", config["language"]])
+     translation.install(unicode=True)
+ 
+diff -urpN pyload.orig/pyLoadCore.py pyload.new/pyLoadCore.py
+--- pyload.orig/pyLoadCore.py	2011-10-04 14:55:18.000000000 +0200
++++ pyload.new/pyLoadCore.py	2011-11-24 03:00:58.257222786 +0100
+@@ -277,7 +277,11 @@ class Core(object):
+ 
+         self.config = ConfigParser()
+ 
+-        translation = gettext.translation("pyLoad", self.path("locale"),
++        if not exists(self.path("locale")):
++	   translation = gettext.translation("pyLoad", "/usr/share/pyload/locale",
++	                                  languages=["en", self.config['general']['language']])
++        else:
++           translation = gettext.translation("pyLoad", self.path("locale"),
+                                           languages=["en", self.config['general']['language']])
+         translation.install(True)
+ 
+diff -urpN pyload.orig/pyLoadGui.py pyload.new/pyLoadGui.py
+--- pyload.orig/pyLoadGui.py	2011-10-04 14:55:18.000000000 +0200
++++ pyload.new/pyLoadGui.py	2011-11-24 03:00:58.257222786 +0100
+@@ -34,6 +34,7 @@ from os.path import abspath
+ from os.path import join
+ from os.path import basename
+ from os.path import commonprefix
++from os.path import exists
+ 
+ from module import InitHomeDir
+ from module.gui.ConnectionManager import *
+@@ -77,7 +78,10 @@ class main(QObject):
+             parser = XMLParser(join(self.path, "module", "config", "gui_default.xml"))
+             lang = parser.xml.elementsByTagName("language").item(0).toElement().text()
+ 
+-        translation = gettext.translation("pyLoadGui", join(pypath, "locale"), languages=["en", str(lang)])
++        if not exists(join(pypath, "locale")):
++	         translation = gettext.translation("pyLoadGui", "/usr/share/pyload/locale", languages=["en", str(lang)])
++        else:
++                 translation = gettext.translation("pyLoadGui", join(pypath, "locale"), languages=["en", str(lang)])
+         try:
+             translation.install(unicode=(True if sys.stdout.encoding.lower().startswith("utf") else False))
+         except:

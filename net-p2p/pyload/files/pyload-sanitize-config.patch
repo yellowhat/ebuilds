@@ -1,0 +1,21 @@
+diff -urpN pyload.orig/module/config/default.conf pyload.new/module/config/default.conf
+--- pyload.orig/module/config/default.conf	2011-10-04 14:55:17.000000000 +0200
++++ pyload.new/module/config/default.conf	2011-11-23 21:35:30.017800846 +0100
+@@ -2,7 +2,7 @@ version: 1
+ 
+ remote - "Remote":
+ 	int port : "Port" = 7227
+-	ip listenaddr : "Adress" = 0.0.0.0
++	ip listenaddr : "Adress" = 127.0.0.1
+ 	bool nolocalauth : "No authentication on local connections" = True
+ ssl - "SSL":
+ 	bool activated : "Activated"= False
+@@ -12,7 +12,7 @@ webinterface - "Webinterface":
+ 	bool activated : "Activated" = True
+ 	builtin;threaded;fastcgi;lightweight server : "Server" = builtin
+ 	bool https : "Use HTTPS" = False
+-	ip host : "IP" = 0.0.0.0
++	ip host : "IP" = 127.0.0.1
+ 	int port : "Port" = 8001
+ 	str template : "Template" = default
+     str prefix: "Path Prefix" =

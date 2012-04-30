@@ -1,0 +1,315 @@
+diff -urN cairo-dock-core/src/cairo-dock-gui-backend.c~ cairo-dock-core/src/cairo-dock-gui-backend.c 
+--- cairo-dock-core/src/cairo-dock-gui-backend.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/cairo-dock-gui-backend.c   2012-01-28 12:21:57.455443098 -0600 
+@@ -21,8 +21,7 @@ 
+ #include <unistd.h> 
+ #define __USE_XOPEN_EXTENDED 
+ #include <stdlib.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+  
+ #include "cairo-dock-keyfile-utilities.h" 
+ #include "cairo-dock-gui-main.h" 
+diff -urN cairo-dock-core/src/cairo-dock-gui-commons.c~ cairo-dock-core/src/cairo-dock-gui-commons.c 
+--- cairo-dock-core/src/cairo-dock-gui-commons.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/cairo-dock-gui-commons.c   2012-01-28 12:22:04.085338397 -0600 
+@@ -24,8 +24,7 @@ 
+ #include <sys/stat.h> 
+ #define __USE_POSIX 
+ #include <time.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+ #include <gdk/gdkx.h> 
+  
+ #include "config.h" 
+diff -urN cairo-dock-core/src/cairo-dock-gui-items.c~ cairo-dock-core/src/cairo-dock-gui-items.c 
+--- cairo-dock-core/src/cairo-dock-gui-items.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/cairo-dock-gui-items.c   2012-01-28 12:22:10.570235888 -0600 
+@@ -22,8 +22,7 @@ 
+ #define __USE_XOPEN_EXTENDED 
+ #include <stdlib.h> 
+ #include <sys/time.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+  
+ #include "config.h" 
+ #include "cairo-dock-module-factory.h" 
+diff -urN cairo-dock-core/src/cairo-dock-gui-main.c~ cairo-dock-core/src/cairo-dock-gui-main.c 
+--- cairo-dock-core/src/cairo-dock-gui-main.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/cairo-dock-gui-main.c   2012-01-28 12:22:19.271098259 -0600 
+@@ -21,8 +21,7 @@ 
+ #include <unistd.h> 
+ #define __USE_XOPEN_EXTENDED 
+ #include <stdlib.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+  
+ #include "config.h" 
+ #include "cairo-dock-module-factory.h" 
+diff -urN cairo-dock-core/src/cairo-dock-gui-simple.c~ cairo-dock-core/src/cairo-dock-gui-simple.c 
+--- cairo-dock-core/src/cairo-dock-gui-simple.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/cairo-dock-gui-simple.c   2012-01-28 12:22:24.391017213 -0600 
+@@ -21,8 +21,7 @@ 
+ #include <unistd.h> 
+ #define __USE_XOPEN_EXTENDED 
+ #include <stdlib.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+  
+ #include "config.h" 
+ #include "cairo-dock-config.h" 
+diff -urN cairo-dock-core/src/cairo-dock-gui-themes.c~ cairo-dock-core/src/cairo-dock-gui-themes.c 
+--- cairo-dock-core/src/cairo-dock-gui-themes.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/cairo-dock-gui-themes.c   2012-01-28 12:22:31.292907932 -0600 
+@@ -24,8 +24,7 @@ 
+ #include <sys/stat.h> 
+ #define __USE_POSIX 
+ #include <time.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+  
+ #include "config.h" 
+ #include "cairo-dock-keyfile-utilities.h" 
+diff -urN cairo-dock-core/src/cairo-dock-menu.c~ cairo-dock-core/src/cairo-dock-menu.c 
+--- cairo-dock-core/src/cairo-dock-menu.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/cairo-dock-menu.c   2012-01-28 12:22:39.901771516 -0600 
+@@ -23,10 +23,8 @@ 
+ #define __USE_POSIX 1 
+ #include <time.h> 
+ #include <glib.h> 
+-#include <glib/gi18n.h> 
+ #include <cairo.h> 
+ #include <gtk/gtk.h> 
+-#include <glib/gstdio.h> 
+ #include <gdk/gdkx.h> 
+  
+ #include "config.h" 
+diff -urN cairo-dock-core/src/cairo-dock.c~ cairo-dock-core/src/cairo-dock.c 
+--- cairo-dock-core/src/cairo-dock.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/cairo-dock.c   2012-01-28 12:22:56.560507221 -0600 
+@@ -59,10 +59,7 @@ 
+ #include <time.h> 
+  
+ #include <glib.h> 
+-#include <glib/gstdio.h> 
+ #include <gtk/gtk.h> 
+-#include <glib/gi18n.h> 
+- 
+  
+ #include "config.h" 
+ #include "cairo-dock-icon-facility.h"  // cairo_dock_get_first_icon 
+diff -urN cairo-dock-core/src/gldit/cairo-dock-dock-facility.c~ cairo-dock-core/src/gldit/cairo-dock-dock-facility.c 
+--- cairo-dock-core/src/gldit/cairo-dock-dock-facility.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-dock-facility.c   2012-01-28 12:17:45.761343007 -0600 
+@@ -22,7 +22,7 @@ 
+ #include <stdio.h> 
+ #include <stdlib.h> 
+  
+-#include <glib/gstdio.h> 
++#include <glib.h> 
+ #include <gtk/gtk.h> 
+ #include <gdk/gdkx.h> 
+  
+diff -urN cairo-dock-core/src/gldit/cairo-dock-dock-factory.c~ cairo-dock-core/src/gldit/cairo-dock-dock-factory.c 
+--- cairo-dock-core/src/gldit/cairo-dock-dock-factory.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-dock-factory.c   2012-01-28 12:17:45.724343557 -0600 
+@@ -22,7 +22,7 @@ 
+ #include <stdio.h> 
+ #include <stdlib.h> 
+  
+-#include <glib/gstdio.h> 
++#include <glib.h> 
+ #include <gtk/gtk.h> 
+ #include <gdk/gdkx.h> 
+  
+diff -urN cairo-dock-core/src/gldit/cairo-dock-dock-manager.c~ cairo-dock-core/src/gldit/cairo-dock-dock-manager.c 
+--- cairo-dock-core/src/gldit/cairo-dock-dock-manager.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-dock-manager.c   2012-01-28 12:17:45.709343780 -0600 
+@@ -22,7 +22,7 @@ 
+ #include <stdio.h> 
+ #include <stdlib.h> 
+  
+-#include <glib/gstdio.h> 
++#include <glib.h> 
+ #include <gtk/gtk.h> 
+ #include <gdk/gdkx.h> 
+  
+diff -urN cairo-dock-core/src/gldit/cairo-dock-draw-opengl.c~ cairo-dock-core/src/gldit/cairo-dock-draw-opengl.c 
+--- cairo-dock-core/src/gldit/cairo-dock-draw-opengl.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-draw-opengl.c   2012-01-28 12:17:45.766342934 -0600 
+@@ -23,7 +23,7 @@ 
+ #include <stdlib.h> 
+ #include <iconv.h> 
+  
+-#include <glib/gstdio.h> 
++#include <glib.h> 
+ #include <gtk/gtk.h> 
+ #include <gdk/gdkx.h> 
+  
+diff -urN cairo-dock-core/src/gldit/cairo-dock-flying-container.c~ cairo-dock-core/src/gldit/cairo-dock-flying-container.c 
+--- cairo-dock-core/src/gldit/cairo-dock-flying-container.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-flying-container.c   2012-01-28 12:17:45.739343335 -0600 
+@@ -20,7 +20,7 @@ 
+ #include <stdlib.h> 
+ #include <sys/time.h> 
+ #include <cairo.h> 
+-#include <glib/gstdio.h> 
++#include <glib.h> 
+ #include <gtk/gtk.h> 
+  
+ #include "gldi-config.h" 
+diff -urN cairo-dock-core/src/gldit/cairo-dock-gui-factory.c~ cairo-dock-core/src/gldit/cairo-dock-gui-factory.c 
+--- cairo-dock-core/src/gldit/cairo-dock-gui-factory.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-gui-factory.c   2012-01-28 12:23:23.711075725 -0600 
+@@ -21,8 +21,7 @@ 
+ #include <unistd.h> 
+ #define __USE_XOPEN_EXTENDED 
+ #include <stdlib.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+  
+ #include "gldi-config.h" 
+ #include "cairo-dock-struct.h" 
+diff -urN /cairo-dock-core/src/gldit/cairo-dock-gui-manager.c /cairo-dock-core/src/gldit/cairo-dock-gui-manager.c 
+--- /cairo-dock-core/src/gldit/cairo-dock-gui-manager.c   2012-01-28 11:41:47.580609000 -0600 
++++ /cairo-dock-core/src/gldit/cairo-dock-gui-manager.c   2012-01-28 12:23:29.738979794 -0600 
+@@ -21,8 +21,7 @@ 
+ #include <unistd.h> 
+ #define __USE_XOPEN_EXTENDED 
+ #include <stdlib.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+  
+ #include "gldi-config.h" 
+ #include "cairo-dock-struct.h" 
+diff -urN cairo-dock-core/src/gldit/cairo-dock-icon-facility.c~ cairo-dock-core/src/gldit/cairo-dock-icon-facility.c 
+--- cairo-dock-core/src/gldit/cairo-dock-icon-facility.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-icon-facility.c   2012-01-28 12:17:45.729343483 -0600 
+@@ -23,7 +23,7 @@ 
+ #include <stdlib.h> 
+  
+ #include <gtk/gtk.h> 
+-#include <glib/gstdio.h> 
++#include <glib.h> 
+  
+ #include <cairo.h> 
+  
+diff -urN cairo-dock-core/src/gldit/cairo-dock-keybinder.h~ cairo-dock-core/src/gldit/cairo-dock-keybinder.h 
+--- cairo-dock-core/src/gldit/cairo-dock-keybinder.h~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-keybinder.h   2012-01-28 12:17:45.753343127 -0600 
+@@ -31,7 +31,7 @@ 
+ #ifndef __CD_KEY_BINDER_H__ 
+ #define __CD_KEY_BINDER_H__ 
+  
+-#include <glib/gtypes.h> 
++#include <glib.h> 
+ #include "cairo-dock-struct.h" 
+ #include "cairo-dock-manager.h" 
+  
+diff -urN cairo-dock-core/src/gldit/cairo-dock-launcher-manager.c~ cairo-dock-core/src/gldit/cairo-dock-launcher-manager.c 
+--- cairo-dock-core/src/gldit/cairo-dock-launcher-manager.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-launcher-manager.c   2012-01-28 12:17:45.716343675 -0600 
+@@ -23,7 +23,7 @@ 
+ #include <gtk/gtk.h> 
+ #include <stdlib.h> 
+ #include <string.h> 
+-#include <glib/gstdio.h> 
++#include <glib.h> 
+  
+  
+ #include "cairo-dock-icon-facility.h"  // cairo_dock_compare_icons_order 
+diff -urN cairo-dock-core/src/gldit/cairo-dock-module-factory.c~ cairo-dock-core/src/gldit/cairo-dock-module-factory.c 
+--- cairo-dock-core/src/gldit/cairo-dock-module-factory.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-module-factory.c   2012-01-28 12:23:44.415746083 -0600 
+@@ -21,8 +21,7 @@ 
+ #include <string.h> 
+ #include <stdlib.h> 
+ #include <gtk/gtk.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+ #include <dlfcn.h> 
+  
+ #include <cairo.h> 
+diff -urN cairo-dock-core/src/gldit/cairo-dock-module-manager.c~ cairo-dock-core/src/gldit/cairo-dock-module-manager.c 
+--- cairo-dock-core/src/gldit/cairo-dock-module-manager.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-module-manager.c   2012-01-28 12:23:49.669662297 -0600 
+@@ -21,8 +21,7 @@ 
+ #include <string.h> 
+ #include <stdlib.h> 
+ #include <gtk/gtk.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+  
+ #include <cairo.h> 
+  
+diff -urN cairo-dock-core/src/gldit/cairo-dock-opengl-font.c~ cairo-dock-core/src/gldit/cairo-dock-opengl-font.c 
+--- cairo-dock-core/src/gldit/cairo-dock-opengl-font.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-opengl-font.c   2012-01-28 12:17:45.726343527 -0600 
+@@ -23,7 +23,7 @@ 
+ #include <stdlib.h> 
+ #include <iconv.h> 
+  
+-#include <glib/gstdio.h> 
++#include <glib.h> 
+ #include <gtk/gtk.h> 
+ #include <gdk/gdkx.h> 
+  
+diff -urN cairo-dock-core/src/gldit/cairo-dock-opengl-path.c~ cairo-dock-core/src/gldit/cairo-dock-opengl-path.c 
+--- cairo-dock-core/src/gldit/cairo-dock-opengl-path.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-opengl-path.c   2012-01-28 12:17:45.711343750 -0600 
+@@ -22,7 +22,7 @@ 
+ #include <stdlib.h> 
+ #include <math.h> 
+  
+-#include <glib/gstdio.h> 
++#include <glib.h> 
+ #include <gtk/gtk.h> 
+ #include <gdk/gdkx.h> 
+  
+diff -urN cairo-dock-core/src/gldit/cairo-dock-packages.c~ cairo-dock-core/src/gldit/cairo-dock-packages.c 
+--- cairo-dock-core/src/gldit/cairo-dock-packages.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-packages.c   2012-01-28 12:24:00.718486072 -0600 
+@@ -24,8 +24,7 @@ 
+ #include <sys/stat.h> 
+ #define __USE_POSIX 
+ #include <time.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+ #include <curl/curl.h> 
+  
+ #include "gldi-config.h" 
+diff -urN cairo-dock-core/src/gldit/cairo-dock-struct.h~ cairo-dock-core/src/gldit/cairo-dock-struct.h 
+--- cairo-dock-core/src/gldit/cairo-dock-struct.h~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-struct.h   2012-01-28 12:24:08.561360905 -0600 
+@@ -27,7 +27,6 @@ 
+ #include <cairo.h> 
+ #include <librsvg/rsvg.h> 
+ #include <librsvg/rsvg-cairo.h> 
+-#include <glib/gi18n.h> 
+ //#include <X1extensions/Xdamage.h> 
+  
+ #include <GL/gl.h> 
+diff -urN cairo-dock-core/src/gldit/cairo-dock-themes-manager.c~ cairo-dock-core/src/gldit/cairo-dock-themes-manager.c 
+--- cairo-dock-core/src/gldit/cairo-dock-themes-manager.c~   2012-01-28 11:41:47.580609000 -0600 
++++ cairo-dock-core/src/gldit/cairo-dock-themes-manager.c   2012-01-28 12:24:17.379220093 -0600 
+@@ -24,8 +24,7 @@ 
+ #include <sys/stat.h> 
+ #define __USE_POSIX 
+ #include <time.h> 
+-#include <glib/gstdio.h> 
+-#include <glib/gi18n.h> 
++#include <glib.h> 
+  
+ #include "gldi-config.h" 
+ #include "cairo-dock-config.h"

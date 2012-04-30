@@ -1,0 +1,30 @@
+diff -urpN pyload.orig/pyLoadCore.py pyload.new/pyLoadCore.py
+--- pyload.orig/pyLoadCore.py	2011-10-04 14:55:18.000000000 +0200
++++ pyload.new/pyLoadCore.py	2011-11-23 05:54:59.042425874 +0100
+@@ -83,14 +83,16 @@ class Core(object):
+ 
+         if len(argv) > 1:
+             try:
+-                options, args = getopt(argv[1:], 'vchdusq',
+-                    ["version", "clear", "clean", "help", "debug", "user", "setup", "configdir=", "changedir", "daemon",
++                options, args = getopt(argv[1:], 'vchdusqp:',
++                    ["pidfile=","version", "clear", "clean", "help", "debug", "user", "setup", "configdir=", "changedir", "daemon",
+                      "quit", "status"])
+ 
+                 for option, argument in options:
+                     if option in ("-v", "--version"):
+                         print "pyLoad", CURRENT_VERSION
+                         exit()
++                    elif option in ("-p", "--pidfile"):
++		        self.pidfile=argument
+                     elif option == "--daemon":
+                         self.daemon = True
+                     elif option in ("-c", "--clear"):
+@@ -152,6 +154,7 @@ class Core(object):
+         print "  -u, --user", " " * 13, "Manages users"
+         print "  -d, --debug", " " * 12, "Enable debug mode"
+         print "  -s, --setup", " " * 12, "Run Setup Assistent"
++	print "  -p, --pidfile <filename>", "Set Name of pidfile"
+         print "  --configdir=<dir>", " " * 6, "Run with <dir> as config directory"
+         print "  --changedir", " " * 12, "Change config dir permanently"
+         print "  --daemon", " " * 15, "Daemonmize after start"
