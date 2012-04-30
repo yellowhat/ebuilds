@@ -1,1 +1,5 @@
 Yellowhat's Git Repo
+
+To add this overlay to layman:
+
+layman -f -o https://raw.github.com/bfolkens/gentoo-bfolkens-layman/master/bfolkens-layman.lisl -a yellowhat-layman
