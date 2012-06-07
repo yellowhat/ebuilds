@@ -1,6 +1,0 @@
-<layman>
-<overlay type="git" src="git://github.com/yellowhat/ebuild.git" name="yellowhat" contact="yellowhat46@gmail.com">
-<link>https://github.com/yellowhat/ebuilds/</link>
-<description>Yellowhat's overlay</description>
-</overlay>
-</layman>
