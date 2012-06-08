@@ -7,9 +7,9 @@ EAPI="4"
 inherit gnome2-utils git-2
 
 DESCRIPTION="Weather extensions for GNOME Shell"
-HOMEPAGE="https://github.com/simon04/gnome-shell-extension-weather"
-EGIT_REPO_URI="https://github.com/simon04/gnome-shell-extension-weather"
-EGIT_BRANCH="gnome3.4"
+HOMEPAGE="https://github.com/Neroth/gnome-shell-extension-weather"
+EGIT_REPO_URI="https://github.com/Neroth/gnome-shell-extension-weather"
+#EGIT_BRANCH="gnome3.4"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -25,10 +25,12 @@ RDEPEND="${COMMON_DEPEND}
         x11-libs/gtk+:3[introspection]
         x11-libs/pango[introspection]"
 DEPEND="${COMMON_DEPEND}
-        sys-devel/gettext
-        >=dev-util/pkgconfig-0.22
+	dev-libs/seed
+	>=dev-util/pkgconfig-0.22
         >=dev-util/intltool-0.26
-        gnome-base/gnome-common"
+	gnome-base/dconf
+	gnome-base/gnome-common
+	sys-devel/gettext"
 
 
 src_configure() {
@@ -42,11 +44,11 @@ src_compile()   {
 
 
 src_install()   {
-        mv weather-extension-configurator{.py,}
-       	dobin weather-extension-configurator
+#       mv weather-settings
+#      	dobin weather-settings
 
-	insinto /usr/share/applications
-#      	doins weather-extension-configurator.desktop
+#	insinto /usr/share/applications
+#      	doins weather-settings.desktop
 
         einstall
 
