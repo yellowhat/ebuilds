@@ -16,7 +16,7 @@ SRC_URI=""
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~x86 ~amd64"
 IUSE="alsa exif gmenu kde terminal tomboy vala webkit xfce xgamma xklavier"
 
 RDEPEND="
