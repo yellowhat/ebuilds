@@ -44,6 +44,8 @@ COMMON_DEPEND=">=dev-libs/glib-2.29.10:2
 	net-libs/libsoup:2.4[introspection]
 	>=sys-auth/polkit-0.100[introspection]
 	>=x11-wm/muffin-1.0.2[introspection]
+	dev-python/lxml
+	dev-python/imaging
 
 	dev-libs/dbus-glib
 	dev-libs/libxml2:2
