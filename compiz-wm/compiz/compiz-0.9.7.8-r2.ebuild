@@ -51,16 +51,21 @@ RDEPEND="${COMMONDEPEND}
 	x11-apps/xvinfo"
 
 src_prepare() {
+
 	# Set compiz Window Decorations to !state=maxvert so top appmenu bar behaviour functions correctly #
 	PATCHES+=( "${FILESDIR}/compiz-0.9.8_decor-setting.diff" )
 
 	for patch in $(cat "${WORKDIR}/debian/patches/series" | grep -v '#'); do
         	PATCHES+=( "${WORKDIR}/debian/patches/${patch}" )
 	done
+
 	base_src_prepare
 
 	sed -e "s:COMPIZ_CORE_INCLUDE_DIR \${includedir}/compiz/core:COMPIZ_CORE_INCLUDE_DIR ${D}usr/include/compiz/core:g" \
 		-i cmake/CompizDefaults.cmake
+
+	sed -e "s: -Werror::g" \
+		-i cmake/CompizCommon.cmake
 }
 
 src_configure() {
@@ -77,10 +82,11 @@ src_configure() {
 		-DCOMPIZ_DISABLE_GS_SCHEMAS_INSTALL=ON
 		-DCOMPIZ_BUILD_TESTING=OFF
 		-DCOMPIZ_DESTDIR="${D}"
-		-DCOMPIZ_DEFAULT_PLUGINS="core,composite,opengl,compiztoolbox,decor,vpswitch,\
-snap,mousepoll,resize,place,move,wall,grid,regex,imgpng,session,gnomecompat,animation,fade,\
-unitymtgrabhandles,workarounds,scale,expo,ezoom,unityshell""
-#		-DCOMPIZ_DEFAULT_PLUGINS="ccp"
+		-DCOMPIZ_DEFAULT_PLUGINS="ccp,core,composite,opengl,compiztoolbox,decor,vpswitch,\
+		snap,mousepoll,resize,place,move,wall,grid,regex,imgpng,session,gnomecompat,animation,fade,\
+		unitymtgrabhandles,workarounds,scale,expo,ezoom,unityshell"
+		"
+
 	cmake-utils_src_configure
 }
 
