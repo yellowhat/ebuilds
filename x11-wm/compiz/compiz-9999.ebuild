@@ -103,16 +103,9 @@ src_configure() {
 		-DCOMPIZ_BUILD_TESTING=OFF
 		-DCOMPIZ_DESTDIR="${D}"
 		-DCOMPIZ_SYSCONFDIR="${D}etc"
-		-DCMAKE_MODULE_PATH="${D}usr/share/cmake"
-		-DCOMPIZ_DEFAULT_PLUGINS="addhelper,animation,animationaddon,annotate,\
-		bench,ccp,clone,commands,compiztoolbox,composite,copytex,crashhandler,cube,\
-		cubeaddon,dbus,decor,expo,extrawm,ezoom,fade,fadedesktop,firepaint,gnomecompat,\
-		grid,group,imgjpeg,imgpng,imgsvg,inotify,loginout,mag,maximumize,mblur,mousepoll,\
-		move,neg,notification,obs,opacify,opengl,place,put,reflex,regex,resize,resizeinfo,ring,\
-		rotate,scale,scaleaddon,scalefilter,screenshot,session,shelf,shift,showdesktop,\
-		showmouse,showrepaint,snap,splash,stackswitch,staticswitcher,switcher,td,text,\
-		thumbnail,titleinfo,trailfocus,trip,vpswitch,wall,wallpaper,water,widget,winrules,wobbly,\
-		workarounds,workspacenames""
+		-DCMAKE_MODULE_PATH="${D}usr/share/cmake"\
+		-DCOMPIZ_DEFAULT_PLUGINS="addhelper,animation,animationaddon,annotate,bench,ccp,clone,commands,compiztoolbox,composite,copytex,crashhandler,cube,cubeaddon,dbus,decor,expo,extrawm,ezoom,fade,fadedesktop,firepaint,gnomecompat,grid,group,imgjpeg,imgpng,imgsvg,inotify,loginout,mag,maximumize,mblur,mousepoll,move,neg,notification,obs,opacify,opengl,place,put,reflex,regex,resize,resizeinfo,ring,rotate,scale,scaleaddon,scalefilter,screenshot,session,shelf,shift,showdesktop,showmouse,showrepaint,snap,splash,stackswitch,staticswitcher,switcher,td,text,thumbnail,titleinfo,trailfocus,trip,vpswitch,wall,wallpaper,water,widget,winrules,wobbly,workarounds,workspacenames"
+		"
 
 	cmake-utils_src_configure
 }
