@@ -1,32 +1,35 @@
 EAPI=4
 
-inherit base gnome2 cmake-utils eutils
+PYTHON_DEPEND="2:2.7"
+SUPPORT_PYTHON_ABIS="1"
+RESTRICT_PYTHON_ABIS="3.*"
 
-DESCRIPTION="Compiz Fusion OpenGL window and compositing manager"
-HOMEPAGE="http://unity.ubuntu.com/"
-SRC_URI="https://launchpad.net/compiz/0.9.8/0.9.8.2/+download/compiz-0.9.8.2.tar.bz2"
+EBZR_REPO_URI="lp:compiz"
+
+inherit cmake-utils eutils bzr base gnome2 python
+
+DESCRIPTION="Compiz OpenGL window and compositing manager"
+HOMEPAGE="https://launchpad.net/compiz"
+SRC_URI=""
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-COMMONDEPEND="!unity-base/ccsm
-	!unity-base/compizconfig-python
-	!unity-base/compizconfig-backend-gconf
-	!x11-wm/compiz
-	!x11-libs/compiz-bcop
-	!x11-libs/libcompizconfig
-	!x11-plugins/compiz-plugins-main
-	>=dev-libs/boost-1.34.0
+COMMONDEPEND="
+	x11-apps/setxkbmap
+	gnome-extra/nm-applet
+	x11-wm/emerald
+
+	dev-libs/boost
 	dev-libs/glib:2
 	dev-cpp/glibmm
 	dev-libs/libxml2
 	dev-libs/libxslt
 	dev-python/pyrex
 	gnome-base/gconf
-	>=gnome-base/librsvg-2.14.0:2
-	media-libs/glu
+	gnome-base/librsvg
 	media-libs/libpng
 	>=x11-libs/cairo-1.0
 	x11-libs/libnotify
@@ -42,7 +45,7 @@ COMMONDEPEND="!unity-base/ccsm
 	x11-libs/libXinerama
 	x11-libs/libICE
 	x11-libs/libSM
-	>=x11-libs/startup-notification-0.7"
+	x11-libs/startup-notification"
 
 DEPEND="${COMMONDEPEND}
 	dev-util/pkgconfig
@@ -53,19 +56,20 @@ RDEPEND="${COMMONDEPEND}
 	x11-apps/mesa-progs
 	x11-apps/xvinfo"
 
-src_prepare() {
-	# Apply Ubuntu patchset #
-#	epatch "${WORKDIR}/${MY_P}-${UVER}.diff"        # This needs to be applied for the debian/ directory to be present #
-#	for patch in $(cat "${S}/debian/patches/series" | grep -v '#'); do
-#		PATCHES+=( "${S}/debian/patches/${patch}" )
-#	done
+src_unpack() {
 
-	# Set compiz Window Decorations to !state=maxvert so top appmenu bar behaviour functions correctly #
-	PATCHES+=( "${FILESDIR}/${PN}-0.9.8_decor-setting.diff" )
+	bzr_src_unpack
+
+}
+
+src_prepare() {
+
+	## Set compiz Window Decorations to !state=maxvert so top appmenu bar behaviour functions correctly #
+	PATCHES+=( "${FILESDIR}/compiz-0.9.8_decor-setting.diff" )
 
 	base_src_prepare
 
-	# Fix DESTDIR #
+	## Fix DESTDIR #
 	epatch "${FILESDIR}/compiz-0.9.8.0_base.cmake.diff"
 	einfo "Fixing DESTDIR for the following files:"
 	for file in $(grep -r 'DESTINATION \$' * | grep -v DESTDIR | awk -F: '{print $1}' | uniq); do
@@ -74,14 +78,15 @@ src_prepare() {
 			-i "${file}"
 	done
 
-	# Fix installation of ccsm and compizconfig-python #
-	sed -e "/message/d" \
-		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
-	sed -e "s:\${INSTALL_ROOT_ARGS}:--root=${D}:g" \
-		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
+	## Fix installation of ccsm and compizconfig-python #
+#	sed -e "/message/d" \
+#		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
+#	sed -e "s:\${INSTALL_ROOT_ARGS}:--root=${D}:g" \
+#		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
 }
 
 src_configure() {
+
 	mycmakeargs="${mycmakeargs}
 		-DCOMPIZ_BIN_PATH="/usr/bin"
 		-DCOMPIZ_BUILD_WITH_RPATH=FALSE
@@ -89,7 +94,7 @@ src_configure() {
 		-DCOMPIZ_INSTALL_GCONF_SCHEMA_DIR="${D}etc/gconf/schemas"
 		-DCOMPIZ_PACKAGING_ENABLED=ON
 		-DCOMPIZ_DISABLE_PLUGIN_KDE=ON
-		-DCOMPIZ_DISABLE_PLUGIN_BLUR=ON
+		-DCOMPIZ_DISABLE_PLUGIN_KDECOMPAT=ON
 		-DUSE_KDE4=OFF
 		-DUSE_GNOME=OFF
 		-DUSE_GTK=ON
@@ -99,13 +104,27 @@ src_configure() {
 		-DCOMPIZ_DESTDIR="${D}"
 		-DCOMPIZ_SYSCONFDIR="${D}etc"
 		-DCMAKE_MODULE_PATH="${D}usr/share/cmake"
-		-DCOMPIZ_DEFAULT_PLUGINS="ccp,core,composite,opengl,compiztoolbox,decor,vpswitch,\
-snap,mousepoll,resize,place,move,wall,grid,regex,imgpng,session,gnomecompat,animation,fade,\
-unitymtgrabhandles,workarounds,scale,expo,ezoom,unityshell""	# Default set of plugins taken from unity.ini #
+		-DCOMPIZ_DEFAULT_PLUGINS="addhelper,animation,animationaddon,annotate,\
+		bench,ccp,clone,commands,compiztoolbox,composite,copytex,crashhandler,cube,\
+		cubeaddon,dbus,decor,expo,extrawm,ezoom,fade,fadedesktop,firepaint,gnomecompat,\
+		grid,group,imgjpeg,imgpng,imgsvg,inotify,loginout,mag,maximumize,mblur,mousepoll,\
+		move,neg,notification,obs,opacify,opengl,place,put,reflex,regex,resize,resizeinfo,ring,\
+		rotate,scale,scaleaddon,scalefilter,screenshot,session,shelf,shift,showdesktop,\
+		showmouse,showrepaint,snap,splash,stackswitch,staticswitcher,switcher,td,text,\
+		thumbnail,titleinfo,trailfocus,trip,vpswitch,wall,wallpaper,water,widget,winrules,wobbly,\
+		workarounds,workspacenames""
+
 	cmake-utils_src_configure
 }
 
+src_compile() {
+
+	cmake-utils_src_compile
+
+}
+
 src_install() {
+
 	pushd ${CMAKE_BUILD_DIR}
 	emake findcompiz_install
 	emake findcompizconfig_install

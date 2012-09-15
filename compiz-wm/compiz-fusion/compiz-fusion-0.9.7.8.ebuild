@@ -14,7 +14,8 @@ IUSE=""
 RDEPEND="
 	x11-apps/setxkbmap
 	gnome-extra/nm-applet
-	>=compiz-wm/compiz-${PV}
-	>=compiz-wm/ccsm-0.9.5.92
-	>=compiz-wm/compiz-plugins-main-0.9.7.0
-	>=compiz-wm/emerald-0.9.5"
+
+	compiz-wm/compiz
+	compiz-wm/ccsm
+	compiz-wm/compiz-plugins-main
+	x11-wm/emerald"
