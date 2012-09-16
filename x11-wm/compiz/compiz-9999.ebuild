@@ -78,11 +78,11 @@ src_prepare() {
 			-i "${file}"
 	done
 
-	## Fix installation of ccsm and compizconfig-python #
-#	sed -e "/message/d" \
-#		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
-#	sed -e "s:\${INSTALL_ROOT_ARGS}:--root=${D}:g" \
-#		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
+	## Fix installation of ccsm and compizconfig-python
+	sed -e "/message/d" \
+		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
+	sed -e "s:\${INSTALL_ROOT_ARGS}:--root=${D}:g" \
+		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
 }
 
 src_configure() {
