@@ -1,10 +1,10 @@
 EAPI=4
 
-PYTHON_DEPEND="2:2.7"
-SUPPORT_PYTHON_ABIS="1"
-RESTRICT_PYTHON_ABIS="3.*"
+#PYTHON_DEPEND="2:2.7"
+#SUPPORT_PYTHON_ABIS="1"
+#RESTRICT_PYTHON_ABIS="3.*"
 
-inherit cmake-utils eutils base gnome2 python
+inherit base gnome2 cmake-utils eutils python
 
 DESCRIPTION="Compiz OpenGL window and compositing manager"
 HOMEPAGE="https://launchpad.net/compiz"
@@ -15,7 +15,8 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-COMMONDEPEND="x11-apps/setxkbmap
+COMMONDEPEND="
+	x11-apps/setxkbmap
 	gnome-extra/nm-applet
 	x11-wm/emerald
 
@@ -44,15 +45,19 @@ COMMONDEPEND="x11-apps/setxkbmap
 	x11-libs/libSM
 	x11-libs/startup-notification"
 
+pkg_setup() {
+	python_set_active_version 2
+}
+
 src_prepare() {
 
 	## Set compiz Window Decorations to !state=maxvert so top appmenu bar behaviour functions correctly #
-	PATCHES+=( "${FILESDIR}/compiz-0.9.8_decor-setting.diff" )
+	PATCHES+=( "${FILESDIR}/${PN}-0.9.8_decor-setting.diff" )
 
 	base_src_prepare
 
 	## Fix DESTDIR #
-	epatch "${FILESDIR}/compiz-0.9.8.0_base.cmake.diff"
+	epatch "${FILESDIR}/${PN}-0.9.8.0_base.cmake.diff"
 	einfo "Fixing DESTDIR for the following files:"
 	for file in $(grep -r 'DESTINATION \$' * | grep -v DESTDIR | awk -F: '{print $1}' | uniq); do
 		echo "    "${file}""
@@ -61,10 +66,10 @@ src_prepare() {
 	done
 
 	## Fix installation of ccsm and compizconfig-python
-	sed -e "/message/d" \
-		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
-	sed -e "s:\${INSTALL_ROOT_ARGS}:--root=${D}:g" \
-		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
+#	sed -e "/message/d" \
+#		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
+#	sed -e "s:\${INSTALL_ROOT_ARGS}:--root=${D}:g" \
+#		-i compizconfig/cmake/exec_setup_py_with_destdir.cmake || die
 }
 
 
@@ -93,11 +98,11 @@ src_configure() {
 	cmake-utils_src_configure
 }
 
-src_compile() {
+#src_compile() {
 
-	cmake-utils_src_compile
+#	cmake-utils_src_compile
 
-}
+#}
 
 src_install() {
 	pushd ${CMAKE_BUILD_DIR}
