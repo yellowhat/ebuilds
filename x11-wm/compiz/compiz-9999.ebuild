@@ -25,7 +25,6 @@ COMMONDEPEND="
 	dev-python/pyrex
 	gnome-base/gconf
 	gnome-base/librsvg
-	media-libs/glu
 	media-libs/libpng
 	x11-libs/cairo
 	x11-libs/libnotify
@@ -41,7 +40,8 @@ COMMONDEPEND="
 	x11-libs/libXinerama
 	x11-libs/libICE
 	x11-libs/libSM
-	x11-libs/startup-notification"
+	x11-libs/startup-notification
+	virtual/glu"
 
 DEPEND="${COMMONDEPEND}
 	dev-util/pkgconfig
