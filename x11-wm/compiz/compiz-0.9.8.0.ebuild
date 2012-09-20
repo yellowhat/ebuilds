@@ -27,6 +27,7 @@ COMMONDEPEND="
 	dev-cpp/glibmm
 	dev-libs/libxml2
 	dev-libs/libxslt
+	dev-libs/protobuf
 	dev-python/pyrex
 	gnome-base/gconf
 	gnome-base/librsvg
