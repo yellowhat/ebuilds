@@ -10,29 +10,28 @@ GNOME2_LA_PUNT="1"
 
 DESCRIPTION="Compiz Fusion OpenGL window and compositing manager patched for the Unity desktop"
 HOMEPAGE="http://unity.ubuntu.com/"
-SRC_URI="${UURL}/${MY_P}.orig.tar.gz
-	${UURL}/${MY_P}-${UVER}.diff.gz"
+SRC_URI="${UURL}/${MY_P}+bzr3377.orig.tar.gz
+	${UURL}/${MY_P}+bzr3377-${UVER}.diff.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS=""
 IUSE=""
 
 COMMONDEPEND="
-	gnome-extra/nm-applet
-	x11-apps/setxkbmap
-
-	dev-libs/boost
+	!x11-libs/compiz-bcop
+	!x11-libs/libcompizconfig
+	!x11-plugins/compiz-plugins-main
+	>=dev-libs/boost-1.34.0
 	dev-libs/glib:2
 	dev-cpp/glibmm
 	dev-libs/libxml2
 	dev-libs/libxslt
-	dev-libs/protobuf
 	dev-python/pyrex
 	gnome-base/gconf
-	gnome-base/librsvg
+	>=gnome-base/librsvg-2.14.0:2
 	media-libs/libpng
-	x11-libs/cairo
+	>=x11-libs/cairo-1.0
 	x11-libs/libnotify
 	x11-libs/pango
 	x11-libs/libwnck:1
@@ -46,7 +45,7 @@ COMMONDEPEND="
 	x11-libs/libXinerama
 	x11-libs/libICE
 	x11-libs/libSM
-	x11-libs/startup-notification
+	>=x11-libs/startup-notification-0.7
 	virtual/glu"
 
 DEPEND="${COMMONDEPEND}
@@ -64,7 +63,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Apply Ubuntu patchset #
-	epatch "${WORKDIR}/${MY_P}-${UVER}.diff"        # This needs to be applied for the debian/ directory to be present #
+	epatch "${WORKDIR}/${MY_P}+bzr3377-${UVER}.diff"        # This needs to be applied for the debian/ directory to be present #
 	for patch in $(cat "${S}/debian/patches/series" | grep -v '#'); do
 		PATCHES+=( "${S}/debian/patches/${patch}" )
 	done
