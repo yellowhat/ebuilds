@@ -1,12 +1,12 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 inherit eutils
 
-DESCRIPTION="VeriCAD is a 2D/3D parametric CAD/CAM software with BOM support."
-HOMEPAGE="http://www.vericad.com/"
-SRC_URI="varicad2011-en_1.10_i386.deb"
+DESCRIPTION="VariCAD is a 2D/3D parametric CAD/CAM software."
+HOMEPAGE="http://www.varicad.com/"
+SRC_URI="x86? ( varicad2011-en_1.10_i386.deb )
+	 amd64? (  varicad2011-en_1.10_amd64.deb )"
 
 IUSE="doc"
 LICENSE=""

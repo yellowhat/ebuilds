@@ -1,12 +1,11 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI="2"
+
 EBZR_REPO_URI="lp:cairo-dock-plug-ins"
 #EBZR_REPO_URI="lp:cairo-dock-plug-ins/2.3"
 #EBZR_REVISION="1939"
-
 
 inherit cmake-utils bzr
 

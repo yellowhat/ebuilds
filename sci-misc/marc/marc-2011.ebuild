@@ -9,7 +9,7 @@ SRC_URI=""
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x64-macos ~x86-solaris"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="
@@ -18,3 +18,7 @@ RDEPEND="
 		sys-libs/libstdc++-v3
 	)"
 DEPEND=""
+
+pkg_postinst() {
+	       einfo "Now you can install MSC Marc Mentat ${PV}"
+}
