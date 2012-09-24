@@ -49,7 +49,8 @@ COMMONDEPEND="
 	x11-libs/libICE
 	x11-libs/libSM
 	>=x11-libs/startup-notification-0.7
-	virtual/glu"
+	virtual/glu
+	virtual/opengl"
 
 DEPEND="${COMMONDEPEND}
 	dev-util/pkgconfig
