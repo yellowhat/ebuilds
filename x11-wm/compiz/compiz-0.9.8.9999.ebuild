@@ -4,14 +4,27 @@
 
 EAPI=4
 
-inherit eutils cmake-utils gnome2-utils toolchain-funcs versionator
+inherit versionator
+
+MINOR_VERSION=$(get_version_component_range 4)
+MAJOR_BRANCH=$(get_version_component_range 1-3)
+
+if [[ ${MINOR_VERSION} == 9999 ]]; then
+	EBZR_REPO_URI="http://bazaar.launchpad.net/~compiz-team/compiz/${MAJOR_BRANCH}"
+	inherit bzr
+	KEYWORDS="~x86 ~amd64"
+	SRC_URI=""
+else
+	KEYWORDS="~amd64 ~x86"
+	SRC_URI="http://launchpad.net/${PN}/${MAJOR_BRANCH}/${PV}/+download/${P}.tar.bz2"
+fi
+
+inherit eutils cmake-utils gnome2-utils toolchain-funcs
 
 DESCRIPTION="OpenGL compositing window manager."
 HOMEPAGE="https://launchpad.net/compiz"
-SRC_URI="http://launchpad.net/${PN}/$(get_version_component_range 1-3)/${PV}/+download/${P}.tar.bz2"
 LICENSE="GPL-2 LGPL-2.1 MIT"
 SLOT="0.9"
-KEYWORDS="~amd64 ~x86"
 IUSE="+cairo debug dbus fuse gnome gtk kde +svg test"
 
 COMMONDEPEND="
@@ -104,8 +117,16 @@ pkg_pretend() {
 	fi
 }
 
+src_unpack() {
+	if [[ ${MINOR_VERSION} == 9999 ]]; then
+		bzr_src_unpack
+	else
+		default
+	fi
+}
+
 src_prepare() {
-	epatch "${FILESDIR}/${P}-sandbox.patch"
+	epatch "${FILESDIR}/${PN}-0.9.8.2-sandbox.patch"
 
 	echo "gtk/gnome/compiz-wm.desktop.in" >> "${S}/po/POTFILES.skip"
 	echo "metadata/core.xml.in" >> "${S}/po/POTFILES.skip"
