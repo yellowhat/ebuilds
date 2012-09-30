@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="
-	>=x11-libs/gtk+-2.8.0:2
+	x11-libs/gtk+:2
 	>=x11-libs/libwnck-2.14.2:1
 	>=x11-wm/compiz-0.9.0"
 
