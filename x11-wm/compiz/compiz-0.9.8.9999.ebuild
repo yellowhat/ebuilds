@@ -9,7 +9,7 @@ MINOR_VERSION=$(get_version_component_range 4)
 MAJOR_BRANCH=$(get_version_component_range 1-3)
 
 if [[ ${MINOR_VERSION} == 9999 ]]; then
-	EBZR_REPO_URI="lp:compiz/0.9.8"
+	EBZR_REPO_URI="lp:compiz/${MAJOR_BRANCH}"
 	inherit bzr
 	SRC_URI=""
 else
