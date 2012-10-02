@@ -9,7 +9,7 @@ MINOR_VERSION=$(get_version_component_range 4)
 MAJOR_BRANCH=$(get_version_component_range 1-3)
 
 if [[ ${MINOR_VERSION} == 9999 ]]; then
-	EBZR_REPO_URI="lp:compiz"
+	EBZR_REPO_URI="lp:compiz/0.9.8"
 	inherit bzr
 	SRC_URI=""
 else
@@ -82,9 +82,6 @@ src_unpack() {
 
 src_prepare() {
 
-	## Set compiz Window Decorations to !state=maxvert so top appmenu bar behaviour functions correctly #
-	PATCHES+=( "${FILESDIR}/${PN}-0.9.8_decor-setting.diff" )
-
 	base_src_prepare
 
 	## Fix DESTDIR #
@@ -132,53 +129,13 @@ src_install() {
 		emake findcompizconfig_install
 		emake install
 
-		# Window manager desktop file for GNOME #
-#		insinto /usr/share/gnome/wm-properties/
-#		doins gtk/gnome/compiz.desktop
-
-		# Keybinding files #
-#		insinto /usr/share/gnome-control-center/keybindings
-#		doins -r gtk/gnome/*.xml
-
 	popd ${CMAKE_BUILD_DIR}
 
 	pushd ${CMAKE_USE_DIR}
 
-		# Docs #
-#		dodoc AUTHORS NEWS README
-#		doman debian/{ccsm,compiz,gtk-window-decorator}.1
-
-		# X11 startup script #
-#		insinto /etc/X11/xinit/xinitrc.d/
-#		doins debian/65compiz_profile-on-session
-
-		# Unity Compiz profile configuration file #
-#		insinto /etc/compizconfig
-#		doins debian/unity.ini
-
-		# Compiz profile upgrade helper files for ensuring smooth upgrades from older configuration files #
-#		insinto /etc/compizconfig/upgrades/
-#		doins debian/profile_upgrades/*.upgrade
-#		insinto /usr/lib/compiz/migration/
-#		doins postinst/convert-files/*.convert
-
-		# Default GConf settings #
-#		insinto /usr/share/gconf/defaults
-#		newins debian/compiz-gnome.gconf-defaults 10_compiz-gnome
-
-		# Default GSettings settings #
-#		insinto /usr/share/glib-2.0/schemas
-#		newins debian/compiz-gnome.gsettings-override 10_compiz-ubuntu.gschema.override
-
 		# Script for resetting all of Compiz's settings #
 		insinto /usr/bin
 		doins "${FILESDIR}/compiz.reset"
-
-		# Script for migrating GConf settings to GSettings #
-#		insinto /usr/lib/compiz/
-#		doins postinst/migration-scripts/02_migrate_to_gsettings.py
-#		insinto /etc/xdg/autostart/
-#		doins "${FILESDIR}/compiz-migrate-to-dconf.desktop"
 
 	popd ${CMAKE_USE_DIR}
 }
