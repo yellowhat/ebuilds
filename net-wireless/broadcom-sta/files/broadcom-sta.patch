@@ -21,4 +21,3 @@
 +	BUILD_PARAMS="-C ${KV_DIR} M=${S} ${BUILD_PARAMS}"
  	BUILD_TARGETS="wl.ko"
  }
- 
