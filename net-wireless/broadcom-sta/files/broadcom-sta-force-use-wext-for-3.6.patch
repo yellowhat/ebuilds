@@ -6,7 +6,7 @@
   	linux-mod_pkg_setup
   
   	BUILD_PARAMS="-C ${KV_DIR} M=${S}"
-+ 	if kernel_is ge 3 6 0; then
++ 	if kernel_is ge 3 6 2; then
 + 		BUILD_PARAMS="${BUILD_PARAMS} API=WEXT"
 + 	fi
   	BUILD_TARGETS="wl.ko"
