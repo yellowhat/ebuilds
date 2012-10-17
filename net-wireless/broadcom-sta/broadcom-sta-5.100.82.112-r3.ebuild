@@ -48,7 +48,7 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-5.10.91.9-license.patch" \
-		"${FILESDIR}/broadcom-sta-force-use-wext-for-3.6.patch" \
+		"${FILESDIR}/broadcom-sta.patch" \
 		"${FILESDIR}/${PN}-5.100.82.38-gcc.patch" \
 		"${FILESDIR}/${PN}-5.100.82.111-linux-3.0.patch" \
 		"${FILESDIR}/${PN}-5.100.82.112-linux-2.6.39.patch" \
