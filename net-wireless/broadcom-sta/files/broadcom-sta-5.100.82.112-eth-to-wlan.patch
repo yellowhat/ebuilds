@@ -1,0 +1,11 @@
+--- src/wl/sys/wl_linux.c.orig	2012-10-15 19:48:52.039559099 +0200
++++ src/wl/sys/wl_linux.c	2012-10-15 19:51:13.511700569 +0200
+@@ -260,7 +260,7 @@
+ #define quote_str(s) to_str(s)
+ 
+ #ifndef BRCM_WLAN_IFNAME
+-#define BRCM_WLAN_IFNAME eth%d
++#define BRCM_WLAN_IFNAME wlan%d
+ #endif
+ 
+ static char name[IFNAMSIZ] = quote_str(BRCM_WLAN_IFNAME);

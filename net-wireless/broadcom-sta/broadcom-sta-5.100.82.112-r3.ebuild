@@ -9,7 +9,7 @@ DESCRIPTION="Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver."
 HOMEPAGE="http://www.broadcom.com/support/802.11/linux_sta.php"
 SRC_BASE="http://www.broadcom.com/docs/linux_sta/hybrid-portsrc_x86_"
 SRC_URI="x86? ( ${SRC_BASE}32-v${PV//\./_}.tar.gz )
-	amd64? ( ${SRC_BASE}64-v${PV//\./_}.tar.gz )"
+        amd64? ( ${SRC_BASE}64-v${PV//\./_}.tar.gz )"
 
 LICENSE="Broadcom"
 KEYWORDS="amd64 x86"
@@ -31,7 +31,11 @@ pkg_setup() {
 	# make checks non-fatal. The correct fix is blackisting ssb and, perhaps
 	# b43 via udev rules. Moreover, previous fix broke binpkgs support.
 	CONFIG_CHECK="~!B43 ~!SSB"
-	if kernel_is ge 2 6 32; then
+	BUILD_PARAMS=""
+	if kernel_is ge 3 6 0; then
+		CONFIG_CHECK="${CONFIG_CHECK} LIB80211 WIRELESS_EXT ~!MAC80211 LIB80211_CRYPT_TKIP"
+		BUILD_PARAMS="API=WEXT"
+	elif kernel_is ge 2 6 32; then
 		CONFIG_CHECK="${CONFIG_CHECK} CFG80211 LIB80211 ~!MAC80211"
 	elif kernel_is ge 2 6 31; then
 		CONFIG_CHECK="${CONFIG_CHECK} LIB80211 WIRELESS_EXT ~!MAC80211"
@@ -42,7 +46,7 @@ pkg_setup() {
 	fi
 	linux-mod_pkg_setup
 
-	BUILD_PARAMS="-C ${KV_DIR} M=${S}"
+	BUILD_PARAMS="-C ${KV_DIR} M=${S} ${BUILD_PARAMS}"
 	BUILD_TARGETS="wl.ko"
 }
 
@@ -51,8 +55,8 @@ src_prepare() {
 		"${FILESDIR}/${PN}-5.100.82.38-gcc.patch" \
 		"${FILESDIR}/${PN}-5.100.82.111-linux-3.0.patch" \
 		"${FILESDIR}/${PN}-5.100.82.112-linux-2.6.39.patch" \
-		"${FILESDIR}/${PN}-5.100.82.112-linux-3.2.patch" \
-		"${FILESDIR}/broadcom-sta.patch"
+		"${FILESDIR}/${PN}-5.100.82.112-linux-3.2.patch"  \
+		"${FILESDIR}/${PN}-5.100.82.112-eth-to-wlan.patch"
 	sed -e "s:^#include <asm/system.h>$:#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)\\n\\0\\n#endif:" \
 		-i src/wl/sys/wl_linux.c || die "sed failed to patch for linux-3.4"
 }
