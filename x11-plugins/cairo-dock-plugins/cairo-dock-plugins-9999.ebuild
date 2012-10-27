@@ -4,7 +4,7 @@
 EAPI="4"
 EBZR_REPO_URI="lp:cairo-dock-plug-ins"
 #EBZR_BRANCH="${PV%.*}"
-#EBZR_REPO_URI="lp:cairo-dock-plug-ins/2.3"
+#EBZR_REPO_URI="lp:cairo-dock-plug-ins/3.1"
 #EBZR_REVISION="1939"
 
 inherit cmake-utils bzr
@@ -40,12 +40,8 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 "
 
-# Additional config options
-#dnd2share
-#rssreader
-#xrandr-in-show-desktop
-#scooby-do
 src_configure() {
+
 	enabler() {
 		local flag=$1
 		local enable=$2
@@ -64,4 +60,11 @@ src_configure() {
 		$(enabler scooby scooby-do)
 		$(enabler webkit weblets)
 		$(enabler xfce)" cmake-utils_src_configure
+}
+
+pkg_postinst() {
+
+	ewarn "THIS IS A LIVE EBUILD, SO YOU KNOW THE RISKS !"
+	ewarn "DO NOT report bugs to Gentoo's bugzilla"
+
 }

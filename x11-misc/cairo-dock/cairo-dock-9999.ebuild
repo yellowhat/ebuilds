@@ -6,7 +6,7 @@ EAPI="2"
 inherit cmake-utils bzr
 
 EBZR_REPO_URI="lp:cairo-dock-core"
-#EBZR_REPO_URI="lp:cairo-dock-core/2.3"
+#EBZR_REPO_URI="lp:cairo-dock-core/3.1"
 
 DESCRIPTION="Cairo-dock is a fast, responsive, Mac OS X-like dock."
 HOMEPAGE="https://launchpad.net/cairo-dock-core/"
@@ -24,7 +24,7 @@ RDEPEND="
 	gnome-base/librsvg
 	sys-apps/dbus
 	x11-libs/cairo
-	x11-libs/gtk+:2
+	x11-libs/gtk+
 	x11-libs/gtkglext
 	x11-libs/libXrender
 	xcomposite? (
@@ -40,27 +40,16 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	## Glib-Patch
-#	epatch "${FILESDIR}/glib.patch"
 
 	bzr_src_prepare
-#	intltoolize --automake --copy --force || die "intltoolize failed"
-#	eautoreconf
+
 }
-
-#src_configure() {
-#	econf $(use_enable xcomposite xextend)
-#}
-
-#src_install() {
-#	#emake DESTDIR="${D}" install || die "emake install failed"
-#}
 
 MAKE_IN_SOURCE_BUILD=true
 
 pkg_postinst() {
+
 	ewarn "THIS IS A LIVE EBUILD, SO YOU KNOW THE RISKS !"
 	ewarn "DO NOT report bugs to Gentoo's bugzilla"
-	ewarn "Please report all bugs to #gentoo-desktop-effects"
-	einfo "Thank you on behalf of the Gentoo Desktop-Effects team"
+
 }
