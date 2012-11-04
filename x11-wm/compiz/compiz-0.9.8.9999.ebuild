@@ -41,6 +41,7 @@ COMMONDEPEND="
 	gnome-base/gconf
 	gnome-base/librsvg
 	media-libs/libpng
+	media-libs/mesa[gallium,llvm,xorg]
 	x11-libs/cairo
 	x11-libs/libnotify
 	x11-libs/pango
