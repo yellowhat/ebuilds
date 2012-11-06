@@ -1,7 +1,8 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="4"
+EAPI="2"
+
 EBZR_REPO_URI="lp:cairo-dock-plug-ins"
 #EBZR_BRANCH="${PV%.*}"
 #EBZR_REPO_URI="lp:cairo-dock-plug-ins/3.1"
@@ -17,54 +18,49 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 
-IUSE="alsa disks doncky gmenu gnome kde network-monitor scooby webkit xfce
-ical xklavier terminal python ruby mono vala"
+IUSE="alsa exif gmenu terminal vala webkit xfce xgamma xklavier"
 
 RDEPEND="
 	x11-misc/cairo-dock
+	x11-libs/cairo
+	gnome-base/librsvg
+	dev-libs/libxml2
 	alsa? ( media-libs/alsa-lib )
+	exif? ( media-libs/libexif )
 	gmenu? ( gnome-base/gnome-menus )
-	kde? ( kde-base/kdelibs )
 	terminal? ( x11-libs/vte )
 	webkit? ( >=net-libs/webkit-gtk-1.0 )
 	xfce? ( xfce-base/thunar )
+	xgamma? ( x11-libs/libXxf86vm )
 	xklavier? ( x11-libs/libxklavier )
-	python? ( dev-lang/python )
-	ruby? ( dev-lang/ruby )
-	mono? ( dev-lang/mono )
-	vala? ( dev-lang/vala )
+	vala? ( dev-lang/vala:0.12 )
 "
 
 DEPEND="${RDEPEND}
 	dev-util/intltool
 	sys-devel/gettext
+	dev-util/pkgconfig
+	dev-libs/libdbusmenu:3[gtk]
 "
 
+src_prepare() {
+	bzr_src_prepare
+}
+
 src_configure() {
-
-	enabler() {
-		local flag=$1
-		local enable=$2
-		[ -z "$enable" ] && enable=$flag
-		use $flag && echo "-Denable-${enable}=yes" || echo "-Denable-${enable}=no"
-	}
-
-	MYCMAKEARGS="-DROOT_PREFIX=${D}
-		$(enabler alsa alsa-mixer)
-		$(enabler disks)
-		$(enabler doncky)
-		$(enabler gmenu)
-		$(enabler gnome gnome-integration)
-		$(enabler kde kde-integration)
-		$(enabler network-monitor)
-		$(enabler scooby scooby-do)
-		$(enabler webkit weblets)
-		$(enabler xfce)" cmake-utils_src_configure
+	mycmakeargs="${mycmakeargs} -DROOT_PREFIX=${D} -DCMAKE_INSTALL_PREFIX=/usr -DLIB_SUFFIX="
+	cmake-utils_src_configure
 }
 
 pkg_postinst() {
-
-	ewarn "THIS IS A LIVE EBUILD, SO YOU KNOW THE RISKS !"
-	ewarn "DO NOT report bugs to Gentoo's bugzilla"
-
+	ewarn ""
+	ewarn ""
+	ewarn "You have installed from a LIVE EBUILD, NOT AN OFFICIAL RELEASE."
+	ewarn "   Thus, it may FAIL to run properly."
+	ewarn ""
+	ewarn "This ebuild is not supported by a Gentoo developer."
+	ewarn "   So, please do NOT report bugs to Gentoo's bugzilla."
+	ewarn "   Instead, report all bugs to yellowhat46@gmail.com"
+	ewarn ""
+	ewarn ""
 }
