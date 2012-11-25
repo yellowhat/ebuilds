@@ -29,6 +29,7 @@ RDEPEND="
 	dev-libs/dbus-glib
 	dev-libs/glib:2
 	dev-libs/libxml2
+	gnome-base/gvfs
 	gnome-base/librsvg
 	net-misc/curl
 	sys-apps/dbus
