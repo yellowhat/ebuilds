@@ -39,6 +39,7 @@ COMMONDEPEND="
 	dev-libs/protobuf
 	dev-python/pyrex
 	gnome-base/gconf
+	<media-libs/glew-1.8
 	gnome-base/librsvg
 	media-libs/libpng
 	media-libs/mesa[gallium,llvm,xorg]
