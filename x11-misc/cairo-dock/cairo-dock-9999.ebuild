@@ -34,7 +34,7 @@ RDEPEND="
 	net-misc/curl
 	sys-apps/dbus
 	x11-libs/cairo
-	x11-libs/gtk+
+	x11-libs/gtk+:2
 	x11-libs/gtkglext
 	x11-libs/libXrender
 	x11-libs/pango
@@ -53,6 +53,11 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	bzr_src_prepare
+}
+
+src_configure() {
+	mycmakeargs="${mycmakeargs} -DROOT_PREFIX=${D} -DCMAKE_INSTALL_PREFIX=/usr -DLIB_SUFFIX="
+	cmake-utils_src_configure
 }
 
 pkg_postinst() {
