@@ -1,7 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-kernel/git-sources/git-sources-3.14_rc7.ebuild,v 1.1 2014/03/17 13:02:27 mpagano Exp $
 
-EAPI="4"
+EAPI="5"
 UNIPATCH_STRICTORDER="yes"
 K_NOUSENAME="yes"
 K_NOSETEXTRAVERSION="yes"
@@ -10,15 +11,15 @@ K_SECURITY_UNSUPPORTED="yes"
 K_DEBLOB_AVAILABLE=0
 ETYPE="sources"
 CKV="${PVR/-r/-git}"
+
 # only use this if it's not an _rc/_pre release
 [ "${PV/_pre}" == "${PV}" ] && [ "${PV/_rc}" == "${PV}" ] && OKV="${PV}"
-inherit kernel-2 git-2
+inherit kernel-2
 detect_version
 
 DESCRIPTION="The very latest -git version of the Linux kernel"
 HOMEPAGE="http://www.kernel.org"
-EGIT_REPO_URI="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
-EGIT_COMMIT="v${PV/_/-}"
+SRC_URI="${KERNEL_URI}"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86"
 IUSE=""
